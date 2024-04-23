@@ -256,5 +256,4 @@ def blackjack_winner(hit_click, stand_click, double_click, split_click,
 
 
 if __name__ == '__main__':
-    # app.run_server(debug=True)
-    app.run_server(debug=True, port=8050)
+     app.run_server(debug=True)
