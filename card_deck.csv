@@ -1,0 +1,53 @@
+﻿card,rank,suit,color,value
+Ad,A,diamonds,red,"1, 11"
+2d,2,diamonds,red,2
+3d,3,diamonds,red,3
+4d,4,diamonds,red,4
+5d,5,diamonds,red,5
+6d,6,diamonds,red,6
+7d,7,diamonds,red,7
+8d,8,diamonds,red,8
+9d,9,diamonds,red,9
+10d,10,diamonds,red,10
+Jd,J,diamonds,red,10
+Qd,Q,diamonds,red,10
+Kd,K,diamonds,red,10
+Ah,A,hearts,red,"1, 11"
+2h,2,hearts,red,2
+3h,3,hearts,red,3
+4h,4,hearts,red,4
+5h,5,hearts,red,5
+6h,6,hearts,red,6
+7h,7,hearts,red,7
+8h,8,hearts,red,8
+9h,9,hearts,red,9
+10h,10,hearts,red,10
+Jh,J,hearts,red,10
+Qh,Q,hearts,red,10
+Kh,K,hearts,red,10
+As,A,spades,black,"1, 11"
+2s,2,spades,black,2
+3s,3,spades,black,3
+4s,4,spades,black,4
+5s,5,spades,black,5
+6s,6,spades,black,6
+7s,7,spades,black,7
+8s,8,spades,black,8
+9s,9,spades,black,9
+10s,10,spades,black,10
+Js,J,spades,black,10
+Qs,Q,spades,black,10
+Ks,K,spades,black,10
+Ac,A,clubs,black,"1, 11"
+2c,2,clubs,black,2
+3c,3,clubs,black,3
+4c,4,clubs,black,4
+5c,5,clubs,black,5
+6c,6,clubs,black,6
+7c,7,clubs,black,7
+8c,8,clubs,black,8
+9c,9,clubs,black,9
+10c,10,clubs,black,10
+Jc,J,clubs,black,10
+Qc,Q,clubs,black,10
+Kc,K,clubs,black,10
