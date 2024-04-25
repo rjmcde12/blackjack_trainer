@@ -136,10 +136,12 @@ def player_correct_move(hand, dealer_up, deck):
     elif hand_type == 'ace':
         non_ace = min(hand_value[0], hand_value[1]) - 1
         if non_ace == 10:
-            correct_move = 'Blackjack!'
+            correct_move = 'BJ'
         else:
             row = with_ace[with_ace.index == non_ace]
             correct_move = row.loc[non_ace, str(dealer_rank)]
+    action_full = {'H': 'Hit', 'S': 'Stand', 'P': 'Split', 'D': 'Double', 'BJ': 'Blackjack!'}
+    correct_move = action_full.get(correct_move, '')
     return correct_move
 
 
