@@ -22,6 +22,7 @@ hard_total = pd.read_csv('hard_total.csv', index_col='hand')
 with_ace = pd.read_csv('with_ace.csv', index_col='hand')
 with_pairs = pd.read_csv('with_pairs.csv', index_col='hand')
 
+
 # +
 def deal_card(deck):
     dealt_card = deck.sample(n=1)['card'].iloc[0]

@@ -130,16 +130,22 @@ def deal_trigger(deal_n, hit_action, stand_action, double_action, split_action,
     triggered_id = ctx.triggered_id
     if triggered_id == 'deal-cards':
         print(f'Trigger ID: {triggered_id}')
-        return deal_cards(deal_n)
-    else:
-        if correct_move == 'Blackjack!':
-            return blackjack_winner(hit_action, stand_action, double_action, split_action,
-                                    dealer_down_card, dealer_up_card, player_card_1_card, player_card_2_card,
-                                    correct_move)
+        deal_output = deal_cards(deal_n)
+        print(deal_output)
+        output_dealer_down = deal_output[0]
+        output_dealer_up = deal_output[1]
+        output_player_card_1 = deal_output[2]
+        output_player_card_2 = deal_output[3]
+        output_correct_move = deal_output[17]
+        if output_correct_move == 'Blackjack!':
+            return blackjack_winner(output_dealer_down, output_dealer_up, output_player_card_1, output_player_card_2,
+                                    output_correct_move)
         else:
-            print(f'Trigger ID: {triggered_id}')
-            return player_action(hit_action, stand_action, double_action, split_action,
-                                 dealer_down_card, dealer_up_card, player_card_1_card, player_card_2_card, correct_move)
+            return deal_output
+    else:
+        print(f'Trigger ID: {triggered_id}')
+        return player_action(hit_action, stand_action, double_action, split_action,
+                             dealer_down_card, dealer_up_card, player_card_1_card, player_card_2_card, correct_move)
 
 
 def deal_cards(n):
@@ -173,13 +179,6 @@ def deal_cards(n):
         split_action = True
 
     correct_move = bj.player_correct_move(player_hand, dealer_up_card, deck)
-    if correct_move == 'Blackjack!':
-        player_action(hit_click, stand_click, double_click, split_click,
-                      dealer_down_card, dealer_up_card, player_card_1_card, player_card_2_card, correct_move)
-        return (dealer_down_card, dealer_up_card, player_card_1_card, player_card_2_card,
-                dealer_down_img, dealer_up_img, player_card_1_img, player_card_2_img,
-                hit_action, stand_action, double_action, split_action, decision_result,
-                hit_click, stand_click, double_click, split_click, correct_move)
 
     print(f'Correct Move: {correct_move}')
     print(f'Dealers Hand: {dealer_down_card}, {dealer_up_card}')
@@ -217,14 +216,14 @@ def player_action(hit_click, stand_click, double_click, split_click,
             dealer_up_img = dealer_down_img = player_card_1_img = player_card_2_img = card_down_image_src
             decision_result = dbc.Alert('       ', color='primary')
         else:
-            if correct_move == 'H' and not hit_click:
-                decision_result = dbc.Alert('Wrong.', color='danger')
-            elif correct_move == 'S' and not stand_click:
-                decision_result = dbc.Alert('Wrong.', color='danger')
-            elif correct_move == 'D' and not double_click:
-                decision_result = dbc.Alert('Wrong.', color='danger')
-            elif correct_move == 'P' and not split_click:
-                decision_result = dbc.Alert('Wrong.', color='danger')
+            if correct_move == 'Hit' and not hit_click:
+                decision_result = dbc.Alert(f'Wrong. Correct Move: {correct_move}', color='danger')
+            elif correct_move == 'Stand' and not stand_click:
+                decision_result = dbc.Alert(f'Wrong. Correct Move: {correct_move}', color='danger')
+            elif correct_move == 'Double' and not double_click:
+                decision_result = dbc.Alert(f'Wrong. Correct Move: {correct_move}', color='danger')
+            elif correct_move == 'Split' and not split_click:
+                decision_result = dbc.Alert(f'Wrong. Correct Move: {correct_move}', color='danger')
             else:
                 decision_result = dbc.Alert('Correct!', color='success')
 
@@ -237,15 +236,14 @@ def player_action(hit_click, stand_click, double_click, split_click,
             hit_click, stand_click, double_click, split_click, correct_move)
 
 
-def blackjack_winner(hit_click, stand_click, double_click, split_click,
-                     dealer_down_card, dealer_up_card, player_card_1_card, player_card_2_card, correct_move):
+def blackjack_winner(dealer_down_card, dealer_up_card, player_card_1_card, player_card_2_card, correct_move):
     print(f'Dealers Hand: {dealer_down_card}, {dealer_up_card}')
     print(f'Players Hand: {player_card_1_card}, {player_card_2_card}')
     print(f'Correct Move: {correct_move}')
     dealer_down_img = next((card['image'] for card in card_deck_images if card['card'] == 'back'), None)
-    dealer_up_img = next((card['image'] for card in card_deck_images if card['card'] == 'back'), None)
-    player_card_1_img = next((card['image'] for card in card_deck_images if card['card'] == 'back'), None)
-    player_card_2_img = next((card['image'] for card in card_deck_images if card['card'] == 'back'), None)
+    dealer_up_img = next((card['image'] for card in card_deck_images if card['card'] == dealer_up_card), None)
+    player_card_1_img = next((card['image'] for card in card_deck_images if card['card'] == player_card_1_card), None)
+    player_card_2_img = next((card['image'] for card in card_deck_images if card['card'] == player_card_2_card), None)
     hit_action = stand_action = double_action = split_action = True
     hit_click = stand_click = double_click = split_click = 0
     decision_result = dbc.Alert('Blackjack!', color='success')
@@ -256,4 +254,5 @@ def blackjack_winner(hit_click, stand_click, double_click, split_click,
 
 
 if __name__ == '__main__':
-     app.run_server(debug=True)
+    # app.run_server(debug=True)
+    app.run_server(debug=True, port=8050)
